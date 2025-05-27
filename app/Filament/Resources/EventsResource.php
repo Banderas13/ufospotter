@@ -13,11 +13,16 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Models\Event;
-
+use App\Models\Location;
+use Filament\Forms\Components\Select;
+use Filament\Forms\Components\TextInput;
 
 class EventsResource extends Resource
 {
     protected static ?string $model = Gebeurtenis::class;
+
+    protected static ?string $label = 'Gebeurtenis';
+    protected static ?string $pluralLabel = 'Gebeurtenissen';
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
@@ -25,25 +30,47 @@ class EventsResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('name')
-                    ->label('Naam')
-                    ->required()
-                    ->maxLength(255),
-
-                Forms\Components\DatePicker::make('created_at')
-                    ->label('Datum')
-                    ->required()
-                    ->maxDate(now()),
-                Forms\Components\Textarea::make('description')
-                    ->label('Beschrijving')
-                    ->required()
-                    ->maxLength(65535),
                 Forms\Components\Select::make('user_id')
                 ->label('Gebruiker')
                     ->relationship('user', 'name')
                     ->required()
                     ->searchable()
                     ->preload(),
+                Forms\Components\TextInput::make('title')
+                    ->label('Titel')
+                    ->required()
+                    ->maxLength(25),
+                    Forms\Components\Textarea::make('description')
+                    ->label('Beschrijving')
+                    ->required()
+                    ->maxLength(65535),
+
+
+
+                Select::make('location')
+                ->label('Locatie')
+                ->relationship('location', 'name')
+                ->searchable()
+                ->preload()
+                ->required()
+                ->createOptionForm([
+                TextInput::make('name')
+                    ->required()
+                    ->label('Naam van locatie'),
+                ])
+                ->createOptionUsing(function (array $data) {
+                
+                return Location::create([
+                    'name' => $data['name'], 
+                ])->getKey();
+    }),
+                    
+                    
+                Forms\Components\DatePicker::make('date')
+                    ->label('Datum')
+                    ->required()
+                    ->maxDate(now()),
+            
             ]);
     }
 
@@ -51,10 +78,30 @@ class EventsResource extends Resource
     {
         return $table
             ->columns([
-                //
+                Tables\Columns\TextColumn::make('user.name')
+                    ->label('Gebruiker')
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('title')
+                    ->label('Titel')
+                    ->searchable()
+                    ->limit(25),
+                Tables\Columns\TextColumn::make('location.name')
+                    ->label('Locatie')
+                    ->searchable()
+                    ->sortable(),
+                
+                Tables\Columns\TextColumn::make('description')
+                    ->label('Beschrijving')
+                    ->searchable()
+                    ->limit(50),
+
+                Tables\Columns\TextColumn::make('date')
+                    ->label('Datum')
+                    ->date('d/m/Y')
+                    ->sortable(),
             ])
             ->filters([
-                //
+                
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
@@ -69,7 +116,7 @@ class EventsResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            
         ];
     }
 
