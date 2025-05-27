@@ -28,15 +28,15 @@ class GebeurtenisOverview extends StatsOverviewWidget
 
         
         if ($diffInMinutes < 60) {
-            $value = $diffInMinutes;
-            $unit = 'minuten';
-        } elseif ($diffInMinutes < 1440) { 
-            $value = floor($diffInMinutes / 60);
-            $unit = 'uur';
-        } else {
-            $value = floor($diffInMinutes / 1440);
-            $unit = 'dagen';
-        }
+        $value = (int) $diffInMinutes;
+        $unit = 'minuten';
+    } elseif ($diffInMinutes < 1440) { 
+        $value = (int) floor($diffInMinutes / 60);
+        $unit = 'uur';
+    } else {
+        $value = (int) floor($diffInMinutes / 1440);
+        $unit = 'dagen';
+    }
 
         return [
             Stat::make('Gebeurtenissen', fn () => Gebeurtenis::count()),
