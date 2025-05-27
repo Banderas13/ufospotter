@@ -82,6 +82,7 @@
                     <a href="/meld" class="hover:text-alien-green transition-colors">Meld</a>
                     <a href="/mijn-meldingen" class="hover:text-alien-green transition-colors">Mijn Meldingen</a>
                     <a href="/over-ons" class="hover:text-alien-green transition-colors">Over Ons</a>
+                    <a href="/contact" class="hover:text-alien-green transition-colors">Contact</a>
                 </div>
             </div>
             
@@ -91,6 +92,7 @@
                 <a href="/meld" class="block py-2 hover:text-alien-green transition-colors">Meld</a>
                 <a href="/mijn-meldingen" class="block py-2 hover:text-alien-green transition-colors">Mijn Meldingen</a>
                 <a href="/over-ons" class="block py-2 hover:text-alien-green transition-colors">Over Ons</a>
+                <a href="/contact" class="hover:text-alien-green transition-colors">Contact</a>
             </div>
         </nav>
     </header>
@@ -297,7 +299,7 @@
                     <ul class="space-y-2">
                         <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Privacy</a></li>
                         <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Algemene Voorwaarden</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Contact</a></li>
+                        <li><a href="/contact" class="text-gray-400 hover:text-white transition-colors">Contact</a></li>
                         <li><a href="#" class="text-gray-400 hover:text-white transition-colors">FAQ</a></li>
                     </ul>
                 </div>
