@@ -17,6 +17,8 @@ return new class extends Migration
             $table->string('title');
             $table->text('description');
             $table->string('location');
+            $table->integer('observation_time');
+            $table->integer('certainty');
             $table->date('date');
             $table->timestamps();
             $table->softDeletes(); 

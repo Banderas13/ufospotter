@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('images', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('report_id')->constrained('reports');
+            $table->foreignId('gebeurtenis_id')->constrained('gebeurtenis');
             $table->string('path');
             $table->timestamps();
             $table->softDeletes();
