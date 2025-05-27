@@ -116,12 +116,12 @@
             </p>
             
             <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
-                <button href="/meld" class="bg-gradient-to-r from-alien-green to-emerald-400 hover:from-emerald-400 hover:to-alien-green text-white font-bold py-4 px-8 rounded-full text-lg transform hover:scale-105 transition-all duration-300 shadow-lg pulse-glow">
+                <a href="/meld" class="bg-gradient-to-r from-alien-green to-emerald-400 hover:from-emerald-400 hover:to-alien-green text-white font-bold py-4 px-8 rounded-full text-lg transform hover:scale-105 transition-all duration-300 shadow-lg pulse-glow">
                     🛸 Meld Nu Je Waarneming
-                </button>
-                <button href:"/meldingen" class="border-2 border-cosmic-purple text-cosmic-purple hover:bg-cosmic-purple hover:text-white font-bold py-4 px-8 rounded-full text-lg transform hover:scale-105 transition-all duration-300">
+                </a>
+                <a href="/meldingen" class="border-2 border-cosmic-purple text-cosmic-purple hover:bg-cosmic-purple hover:text-white font-bold py-4 px-8 rounded-full text-lg transform hover:scale-105 transition-all duration-300">
                     📊 Bekijk Recente Meldingen
-                </button>
+                </a>
             </div>
         </div>
     </section>
@@ -242,9 +242,9 @@
             </div>
             
             <div class="text-center mt-8">
-                <button href="/meldingen" class="border border-cosmic-purple text-cosmic-purple hover:bg-cosmic-purple hover:text-white font-semibold py-3 px-6 rounded-full transition-all duration-300">
+                <a href="/meldingen" class="border border-cosmic-purple text-cosmic-purple hover:bg-cosmic-purple hover:text-white font-semibold py-3 px-6 rounded-full transition-all duration-300">
                     Bekijk Alle Meldingen →
-                </button>
+                </a>
             </div>
         </div>
     </section>
@@ -256,9 +256,9 @@
             <p class="text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
                 Help mee aan het grootste UFO-onderzoek van België. Elke melding telt!
             </p>
-            <button href="/meld" class="bg-gradient-to-r from-alien-green to-emerald-400 hover:from-emerald-400 hover:to-alien-green text-white font-bold py-4 px-12 rounded-full text-lg transform hover:scale-105 transition-all duration-300 shadow-xl pulse-glow">
+            <a href="/meld" class="bg-gradient-to-r from-alien-green to-emerald-400 hover:from-emerald-400 hover:to-alien-green text-white font-bold py-4 px-12 rounded-full text-lg transform hover:scale-105 transition-all duration-300 shadow-xl pulse-glow">
                 🛸 Start Je Melding Nu
-            </button>
+            </a>
         </div>
     </section>
 
