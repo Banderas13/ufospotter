@@ -9,3 +9,7 @@ Route::post('/meld', [GebeurtenisController::class, 'store'])->name('meld.store'
 Route::view('/mijn-meldingen', 'mijnmeldingen')->name('mijnmeldingen');
 Route::view('/over-ons', 'overons')->name('overons');
 Route::view('/contact', 'contact')->name('contact');
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

@@ -6,11 +6,15 @@
         "dev": "vite"
     },
     "devDependencies": {
+        "@popperjs/core": "^2.11.6",
+        "@rollup/rollup-win32-x64-msvc": "^4.41.1",
         "autoprefixer": "^10.4.21",
         "axios": "^1.8.2",
+        "bootstrap": "^5.2.3",
         "concurrently": "^9.0.1",
         "laravel-vite-plugin": "^1.2.0",
         "postcss": "^8.5.3",
+        "sass": "^1.56.1",
         "tailwindcss": "^3.4.1",
         "vite": "^6.2.4"
     }
