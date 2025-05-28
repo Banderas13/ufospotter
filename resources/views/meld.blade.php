@@ -107,11 +107,12 @@
                 
                 <!-- Desktop navigation -->
                 <div class="hidden md:flex space-x-8">
-                    <a href="/" class="text-alien-green font-semibold">Home</a>
-                    <a href="/meld" class="hover:text-alien-green transition-colors">Meld</a>
-                    <a href="/mijn-meldingen" class="hover:text-alien-green transition-colors">Mijn Meldingen</a>
-                    <a href="/over-ons" class="hover:text-alien-green transition-colors">Over Ons</a>
-                    <a href="/contact" class="hover:text-alien-green transition-colors">Contact</a>
+                    <a href="{{ route('home') }}" class="hover:text-alien-green transition-colors">Home</a>
+                    <a href="{{ route('meld') }}" class="text-alien-green font-semibold">Meld</a>
+                    <a href="{{ route('mijn-meldingen') }}" class="hover:text-alien-green transition-colors">Mijn Meldingen</a>
+                    <a href="{{ route('alle-meldingen') }}" class="hover:text-alien-green transition-colors">Alle Meldingen</a>
+                    <a href="{{ route('overons') }}" class="hover:text-alien-green transition-colors">Over Ons</a>
+                    <a href="{{ route('contact') }}" class="hover:text-alien-green transition-colors">Contact</a>
                 </div>
                 <div>
     @guest
@@ -128,11 +129,12 @@
             
             <!-- Mobile navigation -->
             <div id="mobile-menu" class="md:hidden hidden mt-4 space-y-2">
-                <a href="/" class="block py-2 hover:text-alien-green transition-colors">Home</a>
-                <a href="/meld" class="block py-2 text-alien-green font-semibold">Meld</a>
-                <a href="/mijn-meldingen" class="block py-2 hover:text-alien-green transition-colors">Mijn Meldingen</a>
-                <a href="/over-ons" class="block py-2 hover:text-alien-green transition-colors">Over Ons</a>
-                <a href="/contact" class="block py-2 hover:text-alien-green transition-colors">Contact</a>
+                <a href="{{ route('home') }}" class="block py-2 hover:text-alien-green transition-colors">Home</a>
+                <a href="{{ route('meld') }}" class="block py-2 text-alien-green font-semibold">Meld</a>
+                <a href="{{ route('mijn-meldingen') }}" class="block py-2 hover:text-alien-green transition-colors">Mijn Meldingen</a>
+                <a href="{{ route('alle-meldingen') }}" class="block py-2 hover:text-alien-green transition-colors">Alle Meldingen</a>
+                <a href="{{ route('overons') }}" class="block py-2 hover:text-alien-green transition-colors">Over Ons</a>
+                <a href="{{ route('contact') }}" class="block py-2 hover:text-alien-green transition-colors">Contact</a>
             </div>
         </nav>
     </header>

@@ -73,4 +73,41 @@ class GebeurtenisController extends Controller
 
         return view('mijnmeldingen', compact('gebeurtenissen'));
     }
+
+    public function indexAlleMeldingen(Request $request)
+    {
+        $query = Gebeurtenis::with('images', 'user'); // Eager load images and user
+
+        // Filter by location
+        if ($request->filled('location')) {
+            $query->where('location', 'like', '%' . $request->location . '%');
+        }
+
+        // Filter by minimum certainty
+        if ($request->filled('certainty')) {
+            $query->where('certainty', '>=', $request->certainty);
+        }
+
+        // Sort results
+        $sortBy = $request->input('sort_by', 'newest'); // Default to newest
+        switch ($sortBy) {
+            case 'oldest':
+                $query->orderBy('date', 'asc')->orderBy('created_at', 'asc');
+                break;
+            case 'certainty_high_low':
+                $query->orderBy('certainty', 'desc');
+                break;
+            case 'certainty_low_high':
+                $query->orderBy('certainty', 'asc');
+                break;
+            case 'newest':
+            default:
+                $query->orderBy('date', 'desc')->orderBy('created_at', 'desc');
+                break;
+        }
+
+        $gebeurtenissen = $query->get();
+
+        return view('allemeldingen', compact('gebeurtenissen'));
+    }
 } 

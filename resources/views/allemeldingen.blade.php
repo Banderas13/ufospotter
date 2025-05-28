@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mijn UFO Meldingen - UFO Spot Nederland</title>
+    <title>Alle UFO Meldingen - UFO Spot Nederland</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -81,8 +81,8 @@
                 <div class="hidden md:flex space-x-8">
                     <a href="{{ route('home') }}" class="hover:text-alien-green transition-colors">Home</a>
                     <a href="{{ route('meld') }}" class="hover:text-alien-green transition-colors">Meld</a>
-                    <a href="{{ route('mijn-meldingen') }}" class="text-alien-green font-semibold">Mijn Meldingen</a>
-                    <a href="{{ route('alle-meldingen') }}" class="hover:text-alien-green transition-colors">Alle Meldingen</a>
+                    <a href="{{ route('mijn-meldingen') }}" class="hover:text-alien-green transition-colors">Mijn Meldingen</a>
+                    <a href="{{ route('alle-meldingen') }}" class="text-alien-green font-semibold">Alle Meldingen</a>
                     <a href="{{ route('overons') }}" class="hover:text-alien-green transition-colors">Over Ons</a>
                     <a href="{{ route('contact') }}" class="hover:text-alien-green transition-colors">Contact</a>
                 </div>
@@ -104,8 +104,8 @@
             <div id="mobile-menu" class="md:hidden hidden mt-4 space-y-2">
                 <a href="{{ route('home') }}" class="block py-2 hover:text-alien-green transition-colors">Home</a>
                 <a href="{{ route('meld') }}" class="block py-2 hover:text-alien-green transition-colors">Meld</a>
-                <a href="{{ route('mijn-meldingen') }}" class="block py-2 text-alien-green font-semibold">Mijn Meldingen</a>
-                <a href="{{ route('alle-meldingen') }}" class="block py-2 hover:text-alien-green transition-colors">Alle Meldingen</a>
+                <a href="{{ route('mijn-meldingen') }}" class="block py-2 hover:text-alien-green transition-colors">Mijn Meldingen</a>
+                <a href="{{ route('alle-meldingen') }}" class="block py-2 text-alien-green font-semibold">Alle Meldingen</a>
                 <a href="{{ route('overons') }}" class="block py-2 hover:text-alien-green transition-colors">Over Ons</a>
                 <a href="{{ route('contact') }}" class="block py-2 hover:text-alien-green transition-colors">Contact</a>
             </div>
@@ -114,14 +114,48 @@
 
     <!-- Main Content -->
     <main class="container mx-auto px-4 py-12">
-        <h2 class="text-4xl font-bold mb-8 gradient-text text-center">Mijn UFO Meldingen</h2>
+        <h2 class="text-4xl font-bold mb-8 gradient-text text-center">Alle UFO Meldingen</h2>
+
+        <!-- Filter and Sort Form -->
+        <section class="mb-12 p-6 bg-slate-800/60 rounded-xl border border-slate-700">
+            <form method="GET" action="{{ route('alle-meldingen') }}" class="grid md:grid-cols-3 gap-6 items-end">
+                <div>
+                    <label for="location" class="block text-sm font-medium text-alien-green mb-1">Locatie</label>
+                    <input type="text" name="location" id="location" value="{{ request('location') }}" placeholder="bv. Gent" class="w-full bg-slate-700 border-slate-600 text-white rounded-lg shadow-sm focus:border-cosmic-purple focus:ring-cosmic-purple py-3 px-4">
+                </div>
+                <div>
+                    <label for="certainty" class="block text-sm font-medium text-alien-green mb-1">Minimale Zekerheid</label>
+                    <select name="certainty" id="certainty" class="w-full bg-slate-700 border-slate-600 text-white rounded-lg shadow-sm focus:border-cosmic-purple focus:ring-cosmic-purple py-3 px-4">
+                        <option value="">Alle</option>
+                        @for ($i = 1; $i <= 10; $i++)
+                            <option value="{{ $i }}" {{ request('certainty') == $i ? 'selected' : '' }}>{{ $i }}</option>
+                        @endfor
+                    </select>
+                </div>
+                <div>
+                    <label for="sort_by" class="block text-sm font-medium text-alien-green mb-1">Sorteer op</label>
+                    <select name="sort_by" id="sort_by" class="w-full bg-slate-700 border-slate-600 text-white rounded-lg shadow-sm focus:border-cosmic-purple focus:ring-cosmic-purple py-3 px-4">
+                        <option value="newest" {{ request('sort_by', 'newest') == 'newest' ? 'selected' : '' }}>Nieuwste eerst</option>
+                        <option value="oldest" {{ request('sort_by') == 'oldest' ? 'selected' : '' }}>Oudste eerst</option>
+                        <option value="certainty_high_low" {{ request('sort_by') == 'certainty_high_low' ? 'selected' : '' }}>Zekerheid (hoog > laag)</option>
+                        <option value="certainty_low_high" {{ request('sort_by') == 'certainty_low_high' ? 'selected' : '' }}>Zekerheid (laag > hoog)</option>
+                    </select>
+                </div>
+                <div class="md:col-span-3 flex justify-end">
+                    <button type="submit" class="bg-gradient-to-r from-alien-green to-emerald-400 hover:from-emerald-400 hover:to-alien-green text-white font-bold py-2 px-6 rounded-full text-lg transform hover:scale-105 transition-all duration-300 shadow-lg">Filter</button>
+                </div>
+            </form>
+        </section>
 
         @if($gebeurtenissen->isEmpty())
             <div class="text-center text-gray-400 py-10">
                 <p class="text-2xl mb-4">🛸</p>
-                <p class="text-xl">Je hebt nog geen UFO meldingen gedaan.</p>
-                <a href="{{ route('meld') }}" class="mt-6 inline-block bg-gradient-to-r from-alien-green to-emerald-400 hover:from-emerald-400 hover:to-alien-green text-white font-bold py-3 px-6 rounded-full text-lg transform hover:scale-105 transition-all duration-300 shadow-lg pulse-glow">
-                    Doe je eerste melding!
+                <p class="text-xl">Geen UFO meldingen gevonden die voldoen aan je criteria.</p>
+                @if(!request()->hasAny(['location', 'certainty', 'sort_by']))
+                    <p class="text-lg mt-2">Er zijn momenteel nog geen meldingen in het systeem.</p>
+                @endif
+                 <a href="{{ route('alle-meldingen') }}" class="mt-6 inline-block bg-gradient-to-r from-cosmic-purple to-indigo-600 hover:from-indigo-600 hover:to-cosmic-purple text-white font-bold py-3 px-6 rounded-full text-lg transform hover:scale-105 transition-all duration-300 shadow-lg">
+                    Reset Filters
                 </a>
             </div>
         @else
@@ -157,6 +191,11 @@
                         </div>
                         
                         <p class="text-gray-400 text-sm mt-4"><span class="font-semibold text-alien-green">Gemeld op:</span> {{ $gebeurtenis->created_at->format('d M Y, H:i') }}</p>
+                        @if ($gebeurtenis->user)
+                            <p class="text-gray-500 text-xs mt-2">Gemeld door: {{ $gebeurtenis->user->name }}</p>
+                        @else
+                            <p class="text-gray-500 text-xs mt-2">Gemeld door: Anoniem</p>
+                        @endif
                     </div>
                 @endforeach
             </div>
@@ -178,4 +217,4 @@
         }
     </script>
 </body>
-</html>
+</html> 

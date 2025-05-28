@@ -78,11 +78,12 @@
                 
                 <!-- Desktop navigation -->
                 <div class="hidden md:flex space-x-8">
-                    <a href="/" class="text-alien-green font-semibold">Home</a>
-                    <a href="/meld" class="hover:text-alien-green transition-colors">Meld</a>
-                    <a href="/mijn-meldingen" class="hover:text-alien-green transition-colors">Mijn Meldingen</a>
-                    <a href="/over-ons" class="hover:text-alien-green transition-colors">Over Ons</a>
-                    <a href="/contact" class="hover:text-alien-green transition-colors">Contact</a>
+                    <a href="{{ route('home') }}" class="text-alien-green font-semibold">Home</a>
+                    <a href="{{ route('meld') }}" class="hover:text-alien-green transition-colors">Meld</a>
+                    <a href="{{ route('mijn-meldingen') }}" class="hover:text-alien-green transition-colors">Mijn Meldingen</a>
+                    <a href="{{ route('alle-meldingen') }}" class="hover:text-alien-green transition-colors">Alle Meldingen</a>
+                    <a href="{{ route('overons') }}" class="hover:text-alien-green transition-colors">Over Ons</a>
+                    <a href="{{ route('contact') }}" class="hover:text-alien-green transition-colors">Contact</a>
                 </div>
                 <div>
     @guest
@@ -100,11 +101,12 @@
             
             <!-- Mobile navigation -->
             <div id="mobile-menu" class="md:hidden hidden mt-4 space-y-2">
-                <a href="/" class="block py-2 text-alien-green font-semibold">Home</a>
-                <a href="/meld" class="block py-2 hover:text-alien-green transition-colors">Meld</a>
-                <a href="/mijn-meldingen" class="block py-2 hover:text-alien-green transition-colors">Mijn Meldingen</a>
-                <a href="/over-ons" class="block py-2 hover:text-alien-green transition-colors">Over Ons</a>
-                <a href="/contact" class="hover:text-alien-green transition-colors">Contact</a>
+                <a href="{{ route('home') }}" class="block py-2 text-alien-green font-semibold">Home</a>
+                <a href="{{ route('meld') }}" class="block py-2 hover:text-alien-green transition-colors">Meld</a>
+                <a href="{{ route('mijn-meldingen') }}" class="block py-2 hover:text-alien-green transition-colors">Mijn Meldingen</a>
+                <a href="{{ route('alle-meldingen') }}" class="block py-2 hover:text-alien-green transition-colors">Alle Meldingen</a>
+                <a href="{{ route('overons') }}" class="block py-2 hover:text-alien-green transition-colors">Over Ons</a>
+                <a href="{{ route('contact') }}" class="block py-2 hover:text-alien-green transition-colors">Contact</a>
             </div>
         </nav>
     </header>
@@ -131,7 +133,7 @@
                 <a href="/meld" class="bg-gradient-to-r from-alien-green to-emerald-400 hover:from-emerald-400 hover:to-alien-green text-white font-bold py-4 px-8 rounded-full text-lg transform hover:scale-105 transition-all duration-300 shadow-lg pulse-glow">
                     🛸 Meld Nu Je Waarneming
                 </a>
-                <a href="/meldingen" class="border-2 border-cosmic-purple text-cosmic-purple hover:bg-cosmic-purple hover:text-white font-bold py-4 px-8 rounded-full text-lg transform hover:scale-105 transition-all duration-300">
+                <a href="{{ route('alle-meldingen') }}" class="border-2 border-cosmic-purple text-cosmic-purple hover:bg-cosmic-purple hover:text-white font-bold py-4 px-8 rounded-full text-lg transform hover:scale-105 transition-all duration-300">
                     📊 Bekijk Recente Meldingen
                 </a>
             </div>
@@ -248,14 +250,14 @@
                         <span class="text-alien-green font-semibold">Brugge</span>
                         <span class="text-sm text-gray-400">1 dag geleden</span>
                     </div>
-                    <p class="text-gray-300 mb-3">"Metalen schijfvormig object, geruisloos..."</p>
-                    <div class="text-sm text-gray-500">👁️ 2 getuigen • 🎥 Video beschikbaar</div>
+                    <p class="text-gray-300 mb-3">"Een sigaarvormig object vloog geruisloos over..."</p>
+                    <div class="text-sm text-gray-500">👁️ 2 getuigen</div>
                 </div>
             </div>
-            
-            <div class="text-center mt-8">
-                <a href="/meldingen" class="border border-cosmic-purple text-cosmic-purple hover:bg-cosmic-purple hover:text-white font-semibold py-3 px-6 rounded-full transition-all duration-300">
-                    Bekijk Alle Meldingen →
+
+            <div class="text-center mt-12">
+                <a href="{{ route('alle-meldingen') }}" class="bg-gradient-to-r from-cosmic-purple to-indigo-500 hover:from-indigo-500 hover:to-cosmic-purple text-white font-bold py-3 px-5 rounded-full text-lg transform hover:scale-105 transition-all duration-300 shadow-lg">
+                    Bekijk Alle Meldingen
                 </a>
             </div>
         </div>

@@ -9,6 +9,7 @@ Route::view('/', 'home')->name('home');
 Route::view('/meld', 'meld')->name('meld');
 Route::post('/meld', [GebeurtenisController::class, 'store'])->name('meld.store');
 Route::get('/mijn-meldingen', [GebeurtenisController::class, 'indexMijnMeldingen'])->name('mijn-meldingen')->middleware('auth');
+Route::get('/alle-meldingen', [GebeurtenisController::class, 'indexAlleMeldingen'])->name('alle-meldingen');
 Route::view('/over-ons', 'overons')->name('overons');
 Route::view('/contact', 'contact')->name('contact');
 // Donations
