@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\DB;
 
 class GebeurtenisChart extends ChartWidget
 {
-    protected static ?string $heading = 'Gebeurtenissen Toegevoegd';
+    protected static ?string $heading = 'Gebeurtenissen Toegevoegd Per Dag';
 
     protected function getData(): array
     {

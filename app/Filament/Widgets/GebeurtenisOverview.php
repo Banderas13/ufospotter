@@ -39,7 +39,7 @@ class GebeurtenisOverview extends StatsOverviewWidget
     }
 
         return [
-            Stat::make('Gebeurtenissen', fn () => Gebeurtenis::count()),
+            Stat::make('Totaal aantal Gebeurtenissen', fn () => Gebeurtenis::count()),
             Stat::make('Laatste Gebeurtenis', $value)
                 ->description($unit . ' geleden'),
         ];
