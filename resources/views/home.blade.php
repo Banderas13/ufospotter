@@ -143,18 +143,14 @@
     <!-- Stats Section -->
     <section class="py-16 bg-black/30">
         <div class="container mx-auto px-4">
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
                 <div class="bg-gradient-to-b from-slate-800 to-slate-900 p-6 rounded-lg border border-cosmic-purple/30">
-                    <div class="text-3xl font-bold text-alien-green mb-2">1,337</div>
+                    <div class="text-3xl font-bold text-alien-green mb-2">{{ $totalMeldingen }}</div>
                     <div class="text-gray-400">Totaal Meldingen</div>
                 </div>
                 <div class="bg-gradient-to-b from-slate-800 to-slate-900 p-6 rounded-lg border border-cosmic-purple/30">
-                    <div class="text-3xl font-bold text-star-yellow mb-2">89</div>
+                    <div class="text-3xl font-bold text-star-yellow mb-2">{{ $meldingenDezeMaand }}</div>
                     <div class="text-gray-400">Deze Maand</div>
-                </div>
-                <div class="bg-gradient-to-b from-slate-800 to-slate-900 p-6 rounded-lg border border-cosmic-purple/30">
-                    <div class="text-3xl font-bold text-cosmic-purple mb-2">10</div>
-                    <div class="text-gray-400">Provinciën</div>
                 </div>
                 <div class="bg-gradient-to-b from-slate-800 to-slate-900 p-6 rounded-lg border border-cosmic-purple/30">
                     <div class="text-3xl font-bold text-pink-400 mb-2">24/7</div>
@@ -226,34 +222,32 @@
         <div class="container mx-auto px-4">
             <h3 class="text-4xl font-bold text-center mb-12 gradient-text">Recente Waarnemingen</h3>
             
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <div class="bg-slate-800/60 p-6 rounded-lg border border-slate-700 hover:border-alien-green/50 transition-all duration-300">
-                    <div class="flex justify-between items-start mb-4">
-                        <span class="text-alien-green font-semibold">Antwerpen</span>
-                        <span class="text-sm text-gray-400">2 uur geleden</span>
-                    </div>
-                    <p class="text-gray-300 mb-3">"Drie lichtjes in driehoekformatie, stilstaand boven de Schelde..."</p>
-                    <div class="text-sm text-gray-500">👁️ 3 getuigen • ⭐ Geverifieerd</div>
+            @if($recentSightings->isEmpty())
+                <div class="text-center text-gray-400 py-10">
+                    <p class="text-2xl mb-4">🛸</p>
+                    <p class="text-xl">Nog geen recente waarnemingen.</p>
+                    <a href="{{ route('meld') }}" class="mt-6 inline-block bg-gradient-to-r from-alien-green to-emerald-400 hover:from-emerald-400 hover:to-alien-green text-white font-bold py-3 px-6 rounded-full text-lg transform hover:scale-105 transition-all duration-300 shadow-lg pulse-glow">
+                        Meld de eerste!
+                    </a>
                 </div>
-                
-                <div class="bg-slate-800/60 p-6 rounded-lg border border-slate-700 hover:border-alien-green/50 transition-all duration-300">
-                    <div class="flex justify-between items-start mb-4">
-                        <span class="text-alien-green font-semibold">Gent</span>
-                        <span class="text-sm text-gray-400">5 uur geleden</span>
-                    </div>
-                    <p class="text-gray-300 mb-3">"Snel bewegend object met pulserende lichten..."</p>
-                    <div class="text-sm text-gray-500">👁️ 1 getuige • 📷 Foto beschikbaar</div>
+            @else
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    @foreach($recentSightings as $sighting)
+                        <div class="bg-slate-800/60 p-6 rounded-lg border border-slate-700 hover:border-alien-green/50 transition-all duration-300">
+                            <div class="flex justify-between items-start mb-4">
+                                <span class="text-alien-green font-semibold">{{ $sighting->location }}</span>
+                                <span class="text-sm text-gray-400">{{ $sighting->created_at->diffForHumans() }}</span>
+                            </div>
+                            <p class="text-gray-300 mb-3">"{{ Str::limit($sighting->description, 75) }}"</p>
+                            <div class="text-sm text-gray-500">
+                                @if($sighting->images->isNotEmpty())
+                                    📷 Foto beschikbaar
+                                @endif
+                            </div>
+                        </div>
+                    @endforeach
                 </div>
-                
-                <div class="bg-slate-800/60 p-6 rounded-lg border border-slate-700 hover:border-alien-green/50 transition-all duration-300">
-                    <div class="flex justify-between items-start mb-4">
-                        <span class="text-alien-green font-semibold">Brugge</span>
-                        <span class="text-sm text-gray-400">1 dag geleden</span>
-                    </div>
-                    <p class="text-gray-300 mb-3">"Een sigaarvormig object vloog geruisloos over..."</p>
-                    <div class="text-sm text-gray-500">👁️ 2 getuigen</div>
-                </div>
-            </div>
+            @endif
 
             <div class="text-center mt-12">
                 <a href="{{ route('alle-meldingen') }}" class="bg-gradient-to-r from-cosmic-purple to-indigo-500 hover:from-indigo-500 hover:to-cosmic-purple text-white font-bold py-3 px-5 rounded-full text-lg transform hover:scale-105 transition-all duration-300 shadow-lg">

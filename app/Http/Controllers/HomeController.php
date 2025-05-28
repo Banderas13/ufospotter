@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Gebeurtenis;
+use Carbon\Carbon;
 
 class HomeController extends Controller
 {
@@ -13,7 +15,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        // $this->middleware('auth'); // Removed auth middleware
     }
 
     /**
@@ -23,6 +25,16 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $totalMeldingen = Gebeurtenis::count();
+        $meldingenDezeMaand = Gebeurtenis::whereMonth('created_at', Carbon::now()->month)
+                                      ->whereYear('created_at', Carbon::now()->year)
+                                      ->count();
+
+        $recentSightings = Gebeurtenis::with('images') // Eager load images
+                                      ->orderBy('created_at', 'desc')
+                                      ->take(3)
+                                      ->get();
+
+        return view('home', compact('totalMeldingen', 'meldingenDezeMaand', 'recentSightings'));
     }
 }
