@@ -8,6 +8,7 @@ use App\Models\Image;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Auth;
 
 class GebeurtenisController extends Controller
 {
@@ -54,5 +55,22 @@ class GebeurtenisController extends Controller
         }
 
         return redirect()->route('meld')->with('success', 'Je UFO melding is succesvol verzonden! Bedankt voor je bijdrage aan ons onderzoek.');
+    }
+
+    public function indexMijnMeldingen()
+    {
+        $user = Auth::user();
+        // Ensure user is authenticated before trying to get their ID
+        if (!$user) {
+            // Redirect to login or show an error, depending on your app's flow
+            return redirect()->route('login')->with('error', 'Je moet ingelogd zijn om je meldingen te bekijken.');
+        }
+
+        $gebeurtenissen = Gebeurtenis::with('images') // Eager load images
+                                    ->where('user_id', $user->id)
+                                    ->orderBy('created_at', 'desc')
+                                    ->get();
+
+        return view('mijnmeldingen', compact('gebeurtenissen'));
     }
 } 
