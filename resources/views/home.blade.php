@@ -84,20 +84,37 @@
                     <a href="{{ route('alle-meldingen') }}" class="hover:text-alien-green transition-colors">Alle Meldingen</a>
                     <a href="{{ route('overons') }}" class="hover:text-alien-green transition-colors">Over Ons</a>
                     <a href="{{ route('contact') }}" class="hover:text-alien-green transition-colors">Contact</a>
+                    
                 </div>
-                <div>
-    @guest
-        <a href="{{ route('login') }}">Login</a>
-        <a href="{{ route('register') }}">Register</a>
-    @else
-        <span>Welcome, {{ Auth::user()->name }}!</span>
-        <form action="{{ route('logout') }}" method="POST" style="display:inline;">
-            @csrf
-            <button type="submit">Logout</button>
-        </form>
-    @endguest
-</div>
+            <div class="hidden md:flex space-x-8">
+                <div class="flex items-center space-x-4">
+                    @guest
+                        <a href="{{ route('login') }}" 
+                            class="bg-gradient-to-r from-cosmic-purple to-indigo-500 hover:from-indigo-500 hover:to-cosmic-purple text-white px-4 py-2 rounded-full text-sm font-medium transform hover:scale-105 transition-all duration-300 shadow-lg">
+                            🔑 Login
+                        </a>
+                        <a href="{{ route('register') }}" 
+                            class="border-2 border-alien-green text-alien-green hover:bg-alien-green hover:text-white px-4 py-2 rounded-full text-sm font-medium transform hover:scale-105 transition-all duration-300">
+                            👽 Register
+                        </a>
+                    @else
+                    <div class="flex items-center space-x-3">
+                        <div class="flex items-center space-x-2 bg-gradient-to-r from-slate-800/80 to-slate-700/80 px-4 py-2 rounded-full border border-alien-green/30">
+                            <span class="text-lg">👋</span>
+                            <span class="text-alien-green font-medium">{{ Auth::user()->name }}</span>
+                        </div>
+                        <form action="{{ route('logout') }}" method="POST" class="inline">
+                            @csrf
+                            <button type="submit" 
+                                class="bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white px-4 py-2 rounded-full text-sm font-medium transform hover:scale-105 transition-all duration-300 shadow-lg">
+                                🚪 Logout
+                            </button>
+                        </form>
+                    </div>
+                    @endguest
+                </div>
             </div>
+        </div>
             
             <!-- Mobile navigation -->
             <div id="mobile-menu" class="md:hidden hidden mt-4 space-y-2">
@@ -107,7 +124,35 @@
                 <a href="{{ route('alle-meldingen') }}" class="block py-2 hover:text-alien-green transition-colors">Alle Meldingen</a>
                 <a href="{{ route('overons') }}" class="block py-2 hover:text-alien-green transition-colors">Over Ons</a>
                 <a href="{{ route('contact') }}" class="block py-2 hover:text-alien-green transition-colors">Contact</a>
+                
+                <div class="flex items-center space-x-4">
+                    @guest
+                        <a href="{{ route('login') }}" 
+                        class="bg-gradient-to-r from-cosmic-purple to-indigo-500 hover:from-indigo-500 hover:to-cosmic-purple text-white px-4 py-2 rounded-full text-sm font-medium transform hover:scale-105 transition-all duration-300 shadow-lg">
+                            🔑 Login
+                        </a>
+                        <a href="{{ route('register') }}" 
+                        class="border-2 border-alien-green text-alien-green hover:bg-alien-green hover:text-white px-4 py-2 rounded-full text-sm font-medium transform hover:scale-105 transition-all duration-300">
+                            👽 Register
+                        </a>
+                    @else
+                        <div class="flex items-center space-x-3">
+                            <div class="flex items-center space-x-2 bg-gradient-to-r from-slate-800/80 to-slate-700/80 px-4 py-2 rounded-full border border-alien-green/30">
+                                <span class="text-lg">👋</span>
+                                <span class="text-alien-green font-medium">{{ Auth::user()->name }}</span>
+                            </div>
+                            <form action="{{ route('logout') }}" method="POST" class="inline">
+                                @csrf
+                                <button type="submit" 
+                                        class="bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white px-4 py-2 rounded-full text-sm font-medium transform hover:scale-105 transition-all duration-300 shadow-lg">
+                                    🚪 Logout
+                                </button>
+                            </form>
+                        </div>
+                    @endguest
+                </div>
             </div>
+            
         </nav>
     </header>
 

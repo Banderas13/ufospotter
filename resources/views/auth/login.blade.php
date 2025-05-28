@@ -56,46 +56,60 @@
             50% { background-position: 100% 50%; }
         }
     </style>
+    <!-- CSS voor de styling (voeg toe aan je head sectie) -->
+<style>
+    .pulse-glow { 
+        animation: pulse-glow 2s ease-in-out infinite; 
+    }
+    
+    @keyframes pulse-glow {
+        0%, 100% { box-shadow: 0 0 20px rgba(16, 185, 129, 0.3); }
+        50% { box-shadow: 0 0 40px rgba(16, 185, 129, 0.6); }
+    }
+    
+    .gradient-text {
+        background: linear-gradient(45deg, #10b981, #7c3aed, #fbbf24);
+        background-size: 300% 300%;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        animation: gradient-shift 3s ease infinite;
+    }
+    
+    @keyframes gradient-shift {
+        0%, 100% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+    }
+</style>
 </head>
 <body class="bg-gradient-to-b from-space-blue via-slate-900 to-space-blue text-white min-h-screen">
-    <!-- Header -->
-    <header class="bg-black/50 backdrop-blur-sm border-b border-cosmic-purple/30 sticky top-0 z-50">
-        <nav class="container mx-auto px-4 py-4">
-            <div class="flex justify-between items-center">
-                <div class="flex items-center space-x-3">
-                    <div class="w-10 h-10 bg-gradient-to-br from-alien-green to-cosmic-purple rounded-full flex items-center justify-center pulse-glow">
-                        <span class="text-xl">🛸</span>
-                    </div>
-                    <h1 class="text-2xl font-bold gradient-text">UFO Spot België</h1>
+
+
+
+<!-- Alternatief: Header met terug naar home link -->
+<header class="bg-black/50 backdrop-blur-sm border-b border-cosmic-purple/30">
+    <nav class="container mx-auto px-4 py-4">
+        <div class="flex justify-between items-center">
+            <!-- Terug naar home -->
+            <a href="{{ url('/') }}" class="text-alien-green hover:text-emerald-400 transition-colors">
+                ← Terug naar Home
+            </a>
+            
+            <!-- Gecentreerde logo -->
+            <div class="flex items-center space-x-3">
+                <div class="w-10 h-10 bg-gradient-to-br from-alien-green to-cosmic-purple rounded-full flex items-center justify-center pulse-glow">
+                    <span class="text-xl">🛸</span>
                 </div>
-                
-                <!-- Mobile menu button -->
-                <button class="md:hidden text-white" onclick="toggleMenu()">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-                    </svg>
-                </button>
-                
-                <!-- Desktop navigation -->
-                <div class="hidden md:flex space-x-8">
-                    <a href="/" class="hover:text-alien-green transition-colors">Home</a>
-                    <a href="/meld" class="hover:text-alien-green transition-colors">Meld</a>
-                    <a href="/mijn-meldingen" class="hover:text-alien-green transition-colors">Mijn Meldingen</a>
-                    <a href="/over-ons" class="hover:text-alien-green transition-colors">Over Ons</a>
-                    <a href="/contact" class="hover:text-alien-green transition-colors">Contact</a>
-                </div>
+                <h1 class="text-2xl font-bold gradient-text">UFO Spot België</h1>
             </div>
             
-            <!-- Mobile navigation -->
-            <div id="mobile-menu" class="md:hidden hidden mt-4 space-y-2">
-                <a href="/" class="block py-2 hover:text-alien-green transition-colors">Home</a>
-                <a href="/meld" class="block py-2 hover:text-alien-green transition-colors">Meld</a>
-                <a href="/mijn-meldingen" class="block py-2 hover:text-alien-green transition-colors">Mijn Meldingen</a>
-                <a href="/over-ons" class="block py-2 hover:text-alien-green transition-colors">Over Ons</a>
-                <a href="/contact" class="block py-2 hover:text-alien-green transition-colors">Contact</a>
-            </div>
-        </nav>
-    </header>
+            <!-- Lege div voor balans -->
+            <div class="w-24"></div>
+        </div>
+    </nav>
+</header>
+
+
 
     <!-- Login Section -->
     <section class="relative min-h-screen flex items-center justify-center bg-stars overflow-hidden py-20">
