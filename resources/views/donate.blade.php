@@ -77,8 +77,7 @@
     </style>
 </head>
 <body class="bg-gradient-to-b from-space-blue via-slate-900 to-space-blue text-white min-h-screen">
-    <!-- Header -->
-    <header class="bg-black/50 backdrop-blur-sm border-b border-cosmic-purple/30 sticky top-0 z-50">
+<header class="bg-black/50 backdrop-blur-sm border-b border-cosmic-purple/30 sticky top-0 z-50">
         <nav class="container mx-auto px-4 py-4">
             <div class="flex justify-between items-center">
                 <div class="flex items-center space-x-3">
@@ -97,13 +96,24 @@
                 
                 <!-- Desktop navigation -->
                 <div class="hidden md:flex space-x-8">
-                    <a href="/" class="hover:text-alien-green transition-colors">Home</a>
+                    <a href="/" class="text-alien-green font-semibold">Home</a>
                     <a href="/meld" class="hover:text-alien-green transition-colors">Meld</a>
                     <a href="/mijn-meldingen" class="hover:text-alien-green transition-colors">Mijn Meldingen</a>
                     <a href="/over-ons" class="hover:text-alien-green transition-colors">Over Ons</a>
                     <a href="/contact" class="hover:text-alien-green transition-colors">Contact</a>
                 </div>
-            </div>
+                <div>
+    @guest
+        <a href="{{ route('login') }}">Login</a>
+        <a href="{{ route('register') }}">Register</a>
+    @else
+        <span>Welcome, {{ Auth::user()->name }}!</span>
+        <form action="{{ route('logout') }}" method="POST" style="display:inline;">
+            @csrf
+            <button type="submit">Logout</button>
+        </form>
+    @endguest
+</div>
             
             <!-- Mobile navigation -->
             <div id="mobile-menu" class="md:hidden hidden mt-4 space-y-2">
