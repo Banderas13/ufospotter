@@ -80,8 +80,11 @@ class EventsResource extends Resource
                     ->required()
                     ->maxLength(65535),
                     
-                
-            
+                    FileUpload::make('path')
+                    ->label('Afbeelding')
+                    ->image()
+                    ->maxSize(1024) 
+                    ->acceptedFileTypes(['image/*'])
             ]);
     }
 
@@ -114,7 +117,36 @@ class EventsResource extends Resource
                     ->sortable(),
             ])
             ->filters([
-                
+                Tables\Filters\SelectFilter::make('user_id')
+                    ->label('Gebruiker')
+                    ->relationship('user', 'name'),
+                Tables\Filters\SelectFilter::make('location_id')
+                    ->label('Locatie')
+                    ->relationship('location', 'name'),
+    
+    
+                Tables\Filters\SelectFilter::make('certainty')
+                    ->label('Zekerheid')
+                    ->options([
+                        'low' => 'Laag (1-3)',
+                        'medium' => 'Gemiddeld (4-6)', 
+                        'high' => 'Hoog (7-8)',
+                        'very_high' => 'Zeer hoog (9-10)'
+                    ])
+                    ->query(function (Builder $query, array $data): Builder {
+                        return $query->when(
+                            $data['value'],
+                            function (Builder $query, $value): Builder {
+                                return match ($value) {
+                                    'low' => $query->whereBetween('certainty', [1, 3]),
+                                    'medium' => $query->whereBetween('certainty', [4, 6]),
+                                    'high' => $query->whereBetween('certainty', [7, 8]),
+                                    'very_high' => $query->whereBetween('certainty', [9, 10]),
+                                    default => $query,
+                                };
+                            }
+                        );
+                    }),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
