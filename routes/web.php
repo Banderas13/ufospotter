@@ -2,7 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\GebeurtenisController;
+use App\Http\Controllers\DonationController;
 
+// routes pagina's
 Route::view('/', 'home')->name('home');
 Route::view('/meld', 'meld')->name('meld');
 Route::post('/meld', [GebeurtenisController::class, 'store'])->name('meld.store');
@@ -13,3 +15,7 @@ Route::view('/contact', 'contact')->name('contact');
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+// Donations
+Route::get('/doneren', [DonationController::class, 'index'])->name('donate.index');
+Route::post('/doneren', [DonationController::class, 'store'])->name('donate.store');
+Route::get('/donation/thankyou', [DonationController::class, 'thankyou'])->name('donate.thankyou');

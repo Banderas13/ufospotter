@@ -260,6 +260,13 @@
             </div>
         </div>
     </section>
+    
+    <div class="flex justify-center">
+        <a href="{{ route('donate.index') }}" class="bg-gradient-to-r from-alien-green to-emerald-400 hover:from-emerald-400 hover:to-alien-green text-white font-bold py-4 px-12 rounded-full text-lg transform hover:scale-105 transition-all duration-300 shadow-xl pulse-glow">
+            ❤️ Doneer aan het Meldpunt
+        </a>
+    </div>
+
 
     <!-- CTA Section -->
     <section class="py-20 bg-gradient-to-r from-cosmic-purple/20 to-alien-green/20">
