@@ -16,7 +16,7 @@ use App\Models\Event;
 use App\Models\Location;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
-
+use Filament\Forms\Components\FileUpload;
 class EventsResource extends Resource
 {
     protected static ?string $model = Gebeurtenis::class;
@@ -40,14 +40,7 @@ class EventsResource extends Resource
                     ->label('Titel')
                     ->required()
                     ->maxLength(25),
-                    Forms\Components\Textarea::make('description')
-                    ->label('Beschrijving')
-                    ->required()
-                    ->maxLength(65535),
-
-
-
-                Select::make('location')
+                    Select::make('location')
                 ->label('Locatie')
                 ->relationship('location', 'name')
                 ->searchable()
@@ -64,12 +57,30 @@ class EventsResource extends Resource
                     'name' => $data['name'], 
                 ])->getKey();
     }),
-                    
-                    
-                Forms\Components\DatePicker::make('date')
+                    Forms\Components\DatePicker::make('date')
                     ->label('Datum')
                     ->required()
                     ->maxDate(now()),
+
+                    Forms\Components\TextInput::make('observation_time')
+                    ->label('Duur van de waarneming')
+                    ->numeric()
+                    ->minValue(1)
+                    ->required(),
+
+                    Forms\Components\TextInput::make('certainty')
+                    ->label('Zekerheid')
+                    ->numeric()
+                    ->minValue(1)
+                    ->maxValue(10)
+                    ->required(),
+
+                    Forms\Components\Textarea::make('description')
+                    ->label('Beschrijving')
+                    ->required()
+                    ->maxLength(65535),
+                    
+                
             
             ]);
     }
@@ -90,10 +101,12 @@ class EventsResource extends Resource
                     ->searchable()
                     ->sortable(),
                 
-                Tables\Columns\TextColumn::make('description')
-                    ->label('Beschrijving')
-                    ->searchable()
-                    ->limit(50),
+                Tables\Columns\TextColumn::make('observation_time')
+                    ->label('Duur van de waarneming (minuten)')
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('certainty')
+                    ->label('Zekerheid (1-10)')
+                    ->sortable(),
 
                 Tables\Columns\TextColumn::make('date')
                     ->label('Datum')
