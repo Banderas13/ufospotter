@@ -84,6 +84,18 @@
                     <a href="/over-ons" class="hover:text-alien-green transition-colors">Over Ons</a>
                     <a href="/contact" class="hover:text-alien-green transition-colors">Contact</a>
                 </div>
+                <div>
+    @guest
+        <a href="{{ route('login') }}">Login</a>
+        <a href="{{ route('register') }}">Register</a>
+    @else
+        <span>Welcome, {{ Auth::user()->name }}!</span>
+        <form action="{{ route('logout') }}" method="POST" style="display:inline;">
+            @csrf
+            <button type="submit">Logout</button>
+        </form>
+    @endguest
+</div>
             </div>
             
             <!-- Mobile navigation -->
